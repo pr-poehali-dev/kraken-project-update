@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import CinemaHall from "./CinemaHall";
 
 interface MovieCardProps {
   title: string;
@@ -22,9 +23,27 @@ const MovieCard = ({
 }: MovieCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isHallOpen, setIsHallOpen] = useState(false);
+  const [selectedShowtime, setSelectedShowtime] = useState<{
+    time: string;
+    date: string;
+  }>({ time: "", date: "" });
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const showtimes = [
+    { time: "10:30", price: "350₽" },
+    { time: "13:15", price: "350₽" },
+    { time: "16:00", price: "450₽" },
+    { time: "19:45", price: "450₽" },
+    { time: "22:30", price: "350₽" },
+  ];
+
+  const handleShowtimeClick = (time: string) => {
+    setSelectedShowtime({ time, date: "Сегодня" });
+    setIsHallOpen(true);
+  };
 
   return (
     <>
@@ -101,6 +120,22 @@ const MovieCard = ({
           <button className="mt-3 w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold transition-colors">
             Купить билет
           </button>
+
+          <div className="mt-4">
+            <h4 className="text-white font-semibold mb-2">Расписание</h4>
+            <div className="grid grid-cols-2 gap-2">
+              {showtimes.map((showtime, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleShowtimeClick(showtime.time)}
+                  className="bg-gray-800 hover:bg-gray-700 px-3 py-2 rounded text-sm text-white transition-colors"
+                >
+                  <div>{showtime.time}</div>
+                  <div className="text-xs text-gray-400">{showtime.price}</div>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -126,6 +161,14 @@ const MovieCard = ({
           </div>
         </div>
       )}
+
+      <CinemaHall
+        isOpen={isHallOpen}
+        onClose={() => setIsHallOpen(false)}
+        movieTitle={title}
+        showtime={selectedShowtime.time}
+        date={selectedShowtime.date}
+      />
     </>
   );
 };

@@ -13,8 +13,7 @@ const MovieGrid = () => {
       ageRating: "12+",
     },
     {
-      title:
-        "Миссия невыполнима: Финальная расплата предсеанс. обсл. & Куда уходят папы?",
+      title: "Миссия невыполнима: Финальная расплата",
       poster:
         "https://kinosfera-baltika.ru/media_files/movies/vertical_poster_preview/1000000000355/148052_6836c7ae7c1571.56221774.webp",
       trailer:
@@ -22,7 +21,7 @@ const MovieGrid = () => {
       rating: "",
       duration: "169 мин",
       genre: "Короткометражный",
-      ageRating: "16+",
+      ageRating: "18+",
     },
     {
       title: "Лило и Стич предсеанс. обсл. & Куда уходят папы?",
@@ -70,7 +69,7 @@ const MovieGrid = () => {
   ];
 
   return (
-    <section className="bg-gray-900 py-12">
+    <section className="bg-gray-900 py-12" data-schedule>
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-white mb-8">В кино сейчас</h2>
 
